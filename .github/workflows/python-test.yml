@@ -1,4 +1,4 @@
-name: Python Hello World
+name: Python Test
 
 on:
   push:
@@ -24,6 +24,6 @@ jobs:
           python-version: '3.x'  # Set Python version (e.g., 3.8, 3.9)
 
       # Step 3: Run the Python script
-      - name: Run hello.py
+      - name: Run test.py
         run: |
-          python hello.py  # This will run the Python script that prints "Hello, World"
+          python test.py  # This will run the Python script 
