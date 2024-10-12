@@ -23,6 +23,11 @@ jobs:
         with:
           python-version: '3.x'  # Set Python version (e.g., 3.8, 3.9)
 
+      # Step 3: Set repository name as environment variable
+      - name: Set ENV variable with repository name
+        run: |
+          echo "REPO_NAME=${{ github.repository }}" >> $GITHUB_ENV
+
       # Step 3: Run the Python script
       - name: Run test.py
         run: |
