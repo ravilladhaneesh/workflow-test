@@ -17,20 +17,25 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Set up Python environment
+      # Step 2: Clone scraper repo
+      - name: Clone scraper repository
+        run: git clone https://github.com/ravilladhaneesh/scraper.git
+
+      # Step 3: Set up Python environment
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'  # Set Python version (e.g., 3.8, 3.9)
 
-      # Step 3: Set repository name as environment variable
+      # Step 4: Set repository name as environment variable
       - name: Set ENV variable with repository name
         run: |
           echo "REPO_NAME=${{ github.repository }}" >> $GITHUB_ENV
           echo "REPO_PATH=${{ github.workspace }}" >> $GITHUB_ENV
           echo "REPO_URL=https://github.com/${{ github.repository }}" >> $GITHUB_ENV
 
-      # Step 3: Run the Python script
+      # Step 5: Run the Python script
       - name: Run test.py
         run: |
-          python test.py  # This will run the Python script 
+          cd scraper
+          python src/main.py  # This will run the Python script 
