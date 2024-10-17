@@ -38,4 +38,4 @@ jobs:
       # Step 5: Run the Python script
       - name: Run scraper
         run: |
-          python scraper/src/main.py  # This will run the scraper project
+          python github-scraper/src/main.py  # This will run the scraper project
