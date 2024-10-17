@@ -19,7 +19,7 @@ jobs:
 
       # Step 2: Clone scraper repo
       - name: Clone scraper repository
-        run: git clone https://github.com/ravilladhaneesh/scraper.git
+        run: git clone https://github.com/ravilladhaneesh/github-scraper.git
 
       # Step 3: Set up Python environment
       - name: Set up Python
