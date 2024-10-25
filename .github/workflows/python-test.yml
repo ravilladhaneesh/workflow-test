@@ -39,5 +39,5 @@ jobs:
       # Step 5: Run the Python script
       - name: Run scraper
         run: |
-          pip install -r requirements.py
+          pip install -r requirements.txt
           python github-scraper/src/main.py  # This will run the scraper project
