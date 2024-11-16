@@ -20,7 +20,7 @@ jobs:
 
       # Step 2: Clone scraper repo
       - name: Clone scraper repository
-        run: git clone https://github.com/ravilladhaneesh/scraper.git
+        run: git clone https://github.com/ravilladhaneesh/github-scraper.git
 
       # Step 3: Set up Python environment
       - name: Set up Python
@@ -35,8 +35,10 @@ jobs:
           echo "REPO_PATH=${{ github.workspace }}" >> $GITHUB_ENV
           echo "REPO_URL=https://github.com/${{ github.repository }}" >> $GITHUB_ENV
           echo "BRANCH=${{ github.ref_name}}" >> $GITHUB_ENV
+          echo "REPO_VISIBILITY=${{ github.event.repository.private }}" >> $GITHUB_ENV
 
       # Step 5: Run the Python script
       - name: Run scraper
         run: |
-          python scraper/src/main.py  # This will run the scraper project
+          pip install -r github-scraper/requirements.txt
+          python github-scraper/src/main.py  # This will run the scraper project
