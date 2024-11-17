@@ -39,6 +39,10 @@ jobs:
 
       # Step 5: Run the Python script
       - name: Run scraper
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
         run: |
           pip install -r github-scraper/requirements.txt
           python github-scraper/src/main.py  # This will run the scraper project
