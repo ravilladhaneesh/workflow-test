@@ -13,6 +13,9 @@ jobs:
   run-python-script:
     runs-on: ubuntu-latest  # Use an Ubuntu runner
     environment: staging
+    permissions:
+      id-token: write
+      contents: read
     steps:
       # Step 1: Checkout the repository
       - name: Checkout code
@@ -21,6 +24,12 @@ jobs:
       # Step 2: Clone scraper repo
       - name: Clone scraper repository
         run: git clone -b test-post-credentials https://github.com/ravilladhaneesh/github-scraper.git
+
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ secrets.ROLE_ARN}}
+          aws-region: ${{ secrets.AWS_REGION }}
 
       # Step 3: Set up Python environment
       - name: Set up Python
