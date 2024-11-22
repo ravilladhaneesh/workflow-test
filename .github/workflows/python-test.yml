@@ -11,7 +11,10 @@ on:
 jobs:
   run-python-script:
     runs-on: ubuntu-latest  # Use an Ubuntu runner
-
+    environment: staging
+    permissions:
+      id-token: write
+      contents: read
     steps:
       # Step 1: Checkout the repository
       - name: Checkout code
@@ -21,13 +24,20 @@ jobs:
       - name: Clone scraper repository
         run: git clone https://github.com/ravilladhaneesh/github-scraper.git
 
-      # Step 3: Set up Python environment
+      # Step 3: Configure aws credentials
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ secrets.ROLE_ARN}}
+          aws-region: ${{ secrets.AWS_REGION }}
+          
+      # Step 4: Set up Python environment
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.x'  # Set Python version (e.g., 3.8, 3.9)
 
-      # Step 4: Set repository name as environment variable
+      # Step 5: Set repository name as environment variable
       - name: Set ENV variable with repository name
         run: |
           echo "REPO_NAME=${{ github.repository }}" >> $GITHUB_ENV
@@ -36,8 +46,10 @@ jobs:
           echo "BRANCH=${{ github.ref_name}}" >> $GITHUB_ENV
           echo "REPO_VISIBILITY=${{ github.event.repository.private }}" >> $GITHUB_ENV
 
-      # Step 5: Run the Python script
+      # Step 6: Run the Python script
       - name: Run scraper
+        env:
+          ROLE_ARN: ${{ secrets.ROLE_ARN }}
         run: |
           pip install -r github-scraper/requirements.txt
           python github-scraper/src/main.py  # This will run the scraper project
