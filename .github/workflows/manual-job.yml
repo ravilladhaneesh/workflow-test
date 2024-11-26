@@ -9,6 +9,7 @@ on:
 
 jobs:
   manual-workflow:
+    environment: manual_test
     runs-on: Ubuntu-latest
     steps:
       - name: Set up python
