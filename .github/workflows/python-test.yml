@@ -4,11 +4,10 @@ on:
   push:
     branches:
       - main  # Run the workflow when code is pushed to the main branch
-      - "change-role-for-put-data"
 
 jobs:
   run-python-script:
-    runs-on: ubuntu-latest  # Use an Ubuntu runner
+    runs-on: ubuntu-latest
     environment: staging
     permissions:
       id-token: write
