@@ -22,6 +22,13 @@ jobs:
       - name: Clone scraper repository
         run: git clone https://github.com/ravilladhaneesh/github-scraper.git
 
+      # Step 3: Configure aws credentials
+      - name: Configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: ${{ secrets.AWS_PUT_DATA_ROLE}}
+          aws-region: ${{ secrets.AWS_REGION }}
+          
       # Step 4: Set up Python environment
       - name: Set up Python
         uses: actions/setup-python@v4
