@@ -4,13 +4,10 @@ on:
   push:
     branches:
       - main  # Run the workflow when code is pushed to the main branch
-  pull_request:
-    branches:
-      - main  # Run the workflow on pull requests to the main branch
 
 jobs:
   run-python-script:
-    runs-on: ubuntu-latest  # Use an Ubuntu runner
+    runs-on: ubuntu-latest
     environment: staging
     permissions:
       id-token: write
@@ -49,7 +46,7 @@ jobs:
       # Step 6: Run the Python script
       - name: Run scraper
         env:
-          ROLE_ARN: ${{ secrets.ROLE_ARN }}
+          ROLE_ARN: ${{ secrets.AWS_PUT_DATA_ROLE }}
         run: |
           pip install -r github-scraper/requirements.txt
           python github-scraper/src/main.py  # This will run the scraper project
