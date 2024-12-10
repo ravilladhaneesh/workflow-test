@@ -3,7 +3,7 @@ name: Python Test
 on:
   push:
     branches:
-      - "*"  # Run the workflow when code is pushed to the main branch
+      - main  # Run the workflow when code is pushed to the main branch
 
 jobs:
   run-python-script:
