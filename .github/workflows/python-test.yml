@@ -17,9 +17,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Clone scraper repo
-      - name: Clone scraper repository
-        run: git clone https://github.com/ravilladhaneesh/github-scraper.git
+      # Step 2: Clone github-data-processor repo
+      - name: Clone github-data-processor repository
+        run: git clone https://github.com/ravilladhaneesh/github-data-processor.git
 
       # Step 3: Configure aws credentials
       - name: Configure aws credentials
@@ -43,10 +43,10 @@ jobs:
           echo "BRANCH=${{ github.ref_name}}" >> $GITHUB_ENV
           echo "REPO_VISIBILITY=${{ github.event.repository.private }}" >> $GITHUB_ENV
 
-      # Step 6: Run the Python script
+      # Step 6: Run the github-data-processor project
       - name: Run scraper
         env:
           ROLE_ARN: ${{ secrets.AWS_PUT_DATA_ROLE }}
         run: |
-          pip install -r github-scraper/requirements.txt
-          python github-scraper/src/main.py  # This will run the scraper project
+          pip install -r github-data-processor/requirements.txt
+          python github-data-processor/src/main.py  # This will run the github-data-processor project
